@@ -45,7 +45,12 @@ const salesSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    clearSales: (state) => {
+      state.sales = [];
+      state.total = 0;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSales.pending, (state) => {
@@ -83,4 +88,6 @@ const salesSlice = createSlice({
   },
 });
 
+
+export const { clearSales } = salesSlice.actions;
 export default salesSlice.reducer;

@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchproducts } from "../../redux/slices/products.slices";
 import { logout } from "../../redux/slices/auth.slices";
+import { clearSales } from "../../redux/slices/sales.slices";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(clearSales())
     navigate("/");
   };
 

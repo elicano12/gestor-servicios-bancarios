@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 function Home() {
   const navigate = useNavigate();
 
-  const { user, token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <Typography variant="h3">
