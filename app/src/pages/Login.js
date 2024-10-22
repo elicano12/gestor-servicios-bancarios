@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,15 +18,13 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, token } = useSelector((state) => state.auth); // Obtener estado de auth desde Redux
-  console.log(token);
+  const { loading, error, user } = useSelector((state) => state.auth); 
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Llamar a la acción de login usando dispatch
     dispatch(login({ email, password })).then((result) => {
       if (result.meta.requestStatus === "fulfilled") {
-        // Si el login fue exitoso, redirigir
         navigate("/dashboard");
       }
     });
