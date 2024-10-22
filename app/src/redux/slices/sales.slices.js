@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchSales = createAsyncThunk(
-  "sales/",
+  "sales/fetchAll",
   async ({ token }, { rejectWithValue }) => {
     const url = `${process.env.REACT_APP_API_URL}/sales`;
 
@@ -20,7 +20,7 @@ export const fetchSales = createAsyncThunk(
 );
 
 export const fetchSalesByUserId = createAsyncThunk(
-  "sales/:id",
+  "sales/fetchByUserId",
   async ({ token, id }, { rejectWithValue }) => {
     const url = `${process.env.REACT_APP_API_URL}/sales/${id}`;
 
@@ -55,7 +55,10 @@ const salesSlice = createSlice({
       .addCase(fetchSales.fulfilled, (state, action) => {
         state.loading = false;
         state.sales = action.payload;
-        state.total = action.payload.reduce((total, sales) => total + parseInt(sales.requested_amount), 0);
+        state.total = action.payload.reduce(
+          (total, sales) => total + parseInt(sales.requested_amount),
+          0
+        );
       })
       .addCase(fetchSales.rejected, (state, action) => {
         state.loading = false;
@@ -68,7 +71,10 @@ const salesSlice = createSlice({
       .addCase(fetchSalesByUserId.fulfilled, (state, action) => {
         state.loading = false;
         state.sales = action.payload;
-        state.total = action.payload.reduce((total, sales) => total + parseInt(sales.requested_amount), 0);
+        state.total = action.payload.reduce(
+          (total, sales) => total + parseInt(sales.requested_amount),
+          0
+        );
       })
       .addCase(fetchSalesByUserId.rejected, (state, action) => {
         state.loading = false;

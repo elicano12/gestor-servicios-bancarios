@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchUsers = createAsyncThunk(
-  "users/",
+  "users/fetchAll",
   async ({ token }, { rejectWithValue }) => {
     const url = `${process.env.REACT_APP_API_URL}/users`;
     try {

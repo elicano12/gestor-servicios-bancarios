@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const deleteSale = createAsyncThunk(
-  "sales/:id",
+  "sales/deleteById",
   async ({ token, id }, { rejectWithValue }) => {
     const url = `${process.env.REACT_APP_API_URL}/sales/${id}`;
     try {

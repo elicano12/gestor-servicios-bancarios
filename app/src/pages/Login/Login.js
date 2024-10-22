@@ -10,7 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; // Importar hooks de Redux
-import { login } from "../redux/slices/auth.slices"; // Importar la acción de login
+import { login } from "../../redux/slices/auth.slices"; // Importar la acción de login
 import { useNavigate } from "react-router-dom";
 
 function Login() {
