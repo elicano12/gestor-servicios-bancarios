@@ -9,6 +9,7 @@ import {
   ListItemText,
   Typography,
   Box,
+  Button,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -19,12 +20,13 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchproducts } from "../../redux/slices/products.slices";
+import { logout } from "../../redux/slices/auth.slices";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.auth);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -34,6 +36,11 @@ const Dashboard = () => {
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -51,6 +58,9 @@ const Dashboard = () => {
           <Typography variant="h6" noWrap component="div">
             Dashboard
           </Typography>
+          <Button color="inherit" onClick={handleLogout}>
+            Cerrar Sesión
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -65,10 +75,12 @@ const Dashboard = () => {
             <HomeIcon />
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button onClick={() => navigate("/dashboard/users")}>
-            <UsersIcon />
-            <ListItemText primary="Usuarios" />
-          </ListItem>
+          {user.role_id === 1 && (
+            <ListItem button onClick={() => navigate("/dashboard/users")}>
+              <UsersIcon />
+              <ListItemText primary="Usuarios" />
+            </ListItem>
+          )}
           <ListItem button onClick={() => navigate("/dashboard/sales")}>
             <SalesIcon />
             <ListItemText primary="Ventas" />
